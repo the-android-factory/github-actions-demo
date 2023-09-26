@@ -38,12 +38,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.primaryContainer
                 ) {
-                    var currentColor by remember { mutableStateOf(Color.Black) }
+                    var currentColor: Color by remember { mutableStateOf(Color.Black) }
 
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Spacer(modifier = Modifier.height(64.dp))
                         ColorDisplay(color = currentColor)
                         Spacer(modifier = Modifier.height(32.dp))
@@ -58,18 +55,27 @@ class MainActivity : ComponentActivity() {
 
     private fun generateRandomColor(): Color {
         return Color(
-            red = Random.nextInt(1, 255),
-            green = Random.nextInt(1, 255),
-            blue = Random.nextInt(1, 255)
+            red = Random.nextInt(0, 255),
+            blue = Random.nextInt(0, 255),
+            green = Random.nextInt(0, 255),
         )
     }
 }
 
 @Composable
 fun ColorDisplay(color: Color) {
-    Box(
+    Column(
         modifier = Modifier
-            .size(250.dp)
-            .background(color = color, shape = RoundedCornerShape(8.dp))
-    )
+            .background(color = Color.LightGray, shape = RoundedCornerShape(8.dp))
+            .padding(all = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .size(250.dp)
+                .background(color = color, shape = RoundedCornerShape(8.dp))
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = "RGB(${(color.red * 255).toInt()}, ${(color.green * 255).toInt()}, ${(color.blue * 255).toInt()})", color = Color.Black)
+    }
 }
