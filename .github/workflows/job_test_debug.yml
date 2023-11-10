@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  lint:
+  run_tests:
     name: Testing debug variant
     runs-on: ubuntu-latest
 
